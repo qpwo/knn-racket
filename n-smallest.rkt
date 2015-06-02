@@ -20,4 +20,8 @@
            (S (pair-set-add (cdr best) (car left)) (cdr left))]
           [else (S best (cdr left))])))
 
-(provide n-smallest)
+(provide (contract-out
+           [n-smallest (->* ((and/c (not/c negative?) integer?)
+                             list?)
+                            ((-> any/c real?))
+                            list?)]))
