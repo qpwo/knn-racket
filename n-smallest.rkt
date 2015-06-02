@@ -1,6 +1,5 @@
 #lang racket
 ;; Luke Miles, June 2015
-;; actually useless because so slow, better to use sort
 
 (define (pair-> p1 p2) (> (cdr p1) (cdr p2)))
 
