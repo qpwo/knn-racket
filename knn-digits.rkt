@@ -19,7 +19,8 @@
   (call-with-input-file
     path
     (λ (in)
-      (parse-data (string-split (string-trim (port->string in)) "\n")))))
+      (parse-data (string-split (string-trim (port->string in))
+                                "\n")))))
 
 (define train-data (parse-file "optdigits/train.txt"))
 (define test-data  (parse-file "optdigits/test.txt"))

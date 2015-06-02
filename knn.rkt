@@ -1,7 +1,5 @@
 #lang racket
-;; k nearest neighbors
-;; written by Luke Miles in May/June 2015
-;; adapted from http://jeremykun.com/2012/08/26/k-nearest-neighbors-and-handwritten-digit-classification/
+;; Luke Miles, June 2015
 
 ;; returns the most common element in a list
 (define (mode ls)
