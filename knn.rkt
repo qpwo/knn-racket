@@ -28,5 +28,12 @@
             test-data)
      (exact->inexact (length test-data))))
 
-(provide make-knn-classifier test-knn-classifier)
+(provide (contract-out
+           [make-knn-classifier (->  (listof pair?)
+                                     integer?
+                                     (-> any/c any/c real?)
+                                     (-> any/c any/c))]
+           [test-knn-classifier (-> (-> any/c any/c)
+                                    (listof pair?)
+                                    real?)]))
 ; TODO: add contracts
