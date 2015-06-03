@@ -1,11 +1,17 @@
 #lang racket/gui
+;; Luke Miles, June 2015
 (require "array.rkt")
-(require "knn-digits.rkt")
+(require "knn-gui.rkt")
 
 (define grid (make-array 32 32 0))
 
 (define (clip minn n maxx)
   (min (max minn n) maxx))
+
+(define digits (string->list "0123456789"))
+
+(define (char->digit char)
+  (- (char->integer char) 48))
 
 (define (get-mouse-buttons) 
   (let-values ([(__ buttons) (get-current-mouse-state)])
@@ -42,15 +48,19 @@
                                         b-width b-height))))))
     ; keyboard events
     (define/override (on-char event)
-        (case (send event get-key-code)
+      (let ([char (send event get-key-code)])
+        (case char
           [(#\r) (set! grid (make-array 32 32 0))
                  (send dc clear)]
           [(#\g) (send dc set-scale 2 2)
                  (send dc set-text-foreground "black")
                  (send dc draw-text
-                       (format "guess: ~a" (knn-digits (array->list grid)))
+                       (format "guess: ~a" (knn-gui (array->list grid)))
                        0 0)
-                 (send dc set-scale 1 1)]))
+                 (send dc set-scale 1 1)]
+          [else (when (member char digits)
+                  (add-point (cons (char->digit char)
+                                   (array->list grid))))])))
     (super-new)))
  
 (define canvas (new my-canvas% [parent frame]))
