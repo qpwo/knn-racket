@@ -10,7 +10,7 @@
        (sample (normal-dist y std-dev) count)))
 
 (define (list-label sym lst)
-  (map (λ (x) (cons sym x)) lst))
+  (map (λ (x) (cons x sym)) lst))
 
 (define (make-data)
   (append (list-label 'left (normal-cluster -4 0 3))
@@ -25,6 +25,6 @@
 (require "knn.rkt")
 (for ([k (in-range 1 20)])
      (printf "accuracy for k=~a: ~a\n" k
-             (test-knn-classifier (make-knn-classifier train-data k dist)
+             (test-classifier (make-knn-classifier train-data k dist)
                                   test-data)))
 ; TODO: why doesn't it get worse for k near 100?

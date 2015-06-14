@@ -18,8 +18,7 @@
   (define closest-labeled-points
     (n-smallest 8 (points)
                 (λ (labeled-point)
-                  (distance point (cdr labeled-point)))))
-  (mode (map car closest-labeled-points)))
+                  (distance point (car labeled-point)))))
+  (mode (map cdr closest-labeled-points)))
 
 (provide points add-point knn-gui)
-;TODO: don't provide points

@@ -11,8 +11,8 @@
     '()
     (begin
       (let-values ([(soon later) (split-at ls 32)])
-        (cons (cons (string->number (string-trim (car later)))
-                    (apply append (map string->digits soon)))
+        (cons (cons (apply append (map string->digits soon))
+                    (string->number (string-trim (car later))))
               (parse-data (cdr later)))))))
 
 (define (parse-file path)
@@ -23,14 +23,14 @@
                                 "\n")))))
 
 (define train-data (parse-file "data/train.txt"))
-;(define test-data  (parse-file "data/test.txt"))
+(define test-data  (parse-file "data/test.txt"))
 
 (define (distance p1 p2)
-  (for/sum ([x1 p1] [x2 p2]) (abs (- x1 x2))))
+  (for/sum ([x1 p1] [x2 p2]) (sqr (- x1 x2))))
 
 (define knn-digits (make-knn-classifier train-data 8 distance))
 
 (provide knn-digits)
 
-;(test-knn-classifier knn-digits test-data)
+(test-classifier knn-digits test-data)
 ; above line returns 0.9671675013912076

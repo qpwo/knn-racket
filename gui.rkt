@@ -59,8 +59,10 @@
                        0 0)
                  (send dc set-scale 1 1)]
           [else (when (member char digits)
-                  (add-point (cons (char->digit char)
-                                   (array->list grid))))])))
+                  (add-point (cons (array->list grid)
+                                   (char->digit char))))])))
+                  ;(add-point (cons (char->digit char)
+                  ;                 (array->list grid))))])))
     (super-new)))
  
 (define canvas (new my-canvas% [parent frame]))

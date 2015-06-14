@@ -4,7 +4,8 @@ KNN is for k-nearest-neighbors, which is a machine learning algorithm.
 I learned about it [here](http://jeremykun.com/2012/08/26/k-nearest-neighbors-and-handwritten-digit-classification/).
 You can learn about it [here](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm).
 ## How to use knn-racket
-The real meat of the program is in **knn.rkt**. It provides make-knn-classifier and test-knn-classifier. To use it, require it then pass it your data. See knn-example.rkt for an example.
+The real meat of the program is in **knn.rkt**. It provides make-knn-classifier and test-classifier. To use it, require it then pass it your data. See knn-example.rkt for an example.
+
 Other files:
 * **data/**: A folder including some hand-written-digits data.
  * **gui.txt**: The data that knn-gui.rkt generates.

@@ -19,13 +19,13 @@
     (define closest-labeled-points
       (n-smallest k labeled-data
                   (λ (labeled-point)
-                     (distance point (cdr labeled-point)))))
-    (mode (map car closest-labeled-points))))
+                     (distance point (car labeled-point)))))
+    (mode (map cdr closest-labeled-points))))
 
 ;; given a classifier and some labeled points,
 ;; return the fraction that the classifier labels correctly
-(define (test-knn-classifier classifier test-data)
-  (/ (count (λ (point) (eq? (car point) (classifier (cdr point))))
+(define (test-classifier classifier test-data)
+  (/ (count (λ (point) (eq? (classifier (car point)) (cdr point)))
             test-data)
      (exact->inexact (length test-data))))
 
@@ -34,10 +34,10 @@
                                    (listof real?)
                                    real?)]
            [mode (-> list any/c)]
-           [make-knn-classifier (->  (listof pair?)
-                                     integer?
-                                     (-> any/c any/c real?)
+           [make-knn-classifier (->* ((listof pair?)
+                                      integer?)
+                                     ((-> any/c any/c real?))
                                      (-> any/c any/c))]
-           [test-knn-classifier (-> (-> any/c any/c)
+           [test-classifier (-> (-> any/c any/c)
                                     (listof pair?)
                                     real?)]))
